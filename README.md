@@ -26,15 +26,9 @@ The FusionAuth configuration files also make use of a unique feature of FusionAu
 
 FusionAuth will be initially configured with these settings:
 
-* An update to the Tenant Theme including the ChangeBank Theme to make the look and feel of the login the same as the ChangeBank App.
-* The Tenant Issuer will be set to `http://10.0.2.2:9011` to allow for testing with [Android Emulator](https://developer.android.com/studio/run/emulator).
-* Two Applications `Example Android App` and `Secondary Application` to test users with and without access to the Android App.
-* Your client secret is: `super-secret-secret-that-should-be-regenerated-for-production`
-* You'll have three example usernames available with slightly different user profiles `richard@example.com`, `monica@example.com` and `gilfoyle@example.com`. All having access to `Example Android App` where the password for all three is `password`.
-* And an example user without access `erlich@example.com` to the `Example Android App`
+* Your `Example Android App` test user `richard@example.com` and your password is `password`.
 * Your FusionAuth admin username is `admin@example.com` and your password is `password`.
 * Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
-
 
 You can log into the [FusionAuth admin UI](http://localhost:9011/admin) and look around if you want, but with Docker/Kickstart you don't need to.
 
@@ -46,9 +40,7 @@ This Android Quickstart is fully functional and can be used without any modifica
 - Either [connect a hardware device](https://developer.android.com/studio/run/device) or create an Android Virtual Device to run the [Android Emulator](https://developer.android.com/studio/run/emulator).
 - [Build and run the app](https://developer.android.com/studio/run/) following Android Studio guidelines.
 
-#### Automated End 2 End Test
-
-The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
+And there are additional [testing instructions](TESTING.md) available for different scenarios.
 
 ## Further Information
 
@@ -63,7 +55,7 @@ See the [FusionAuth Android Quickstart](https://fusionauth.io/docs/quickstarts/q
 See the [FusionAuth Android SDK Documentation](https://fusionauth.io/docs/sdks/android-sdk) for an overview to the SDK. Or see the latest [Full library documentation](https://github.com/FusionAuth/fusionauth-android-sdk/blob/main/library/docs/index.md) for the complete documentation of the SDK.
 
 <!--
-How to create the example App manually:
+Maintainer info on how to create the example App manually:
 
 The example App is a copy from https://github.com/FusionAuth/fusionauth-android-sdk/tree/main/app by:
 
