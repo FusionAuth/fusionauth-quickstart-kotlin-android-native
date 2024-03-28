@@ -54,6 +54,10 @@ See the [FusionAuth Android Quickstart](https://fusionauth.io/docs/quickstarts/q
 
 See the [FusionAuth Android SDK Documentation](https://fusionauth.io/docs/sdks/android-sdk) for an overview to the SDK. Or see the latest [Full library documentation](https://github.com/FusionAuth/fusionauth-android-sdk/blob/main/library/docs/index.md) for the complete documentation of the SDK.
 
+### Automated End 2 End Testing
+
+While developing the Android SDK we made use of Automated End 2 End Testing within the [Android Emulator](https://developer.android.com/studio/run/emulator). This is something useful during App development and we moved the test as well into the quickstart and further documented our testing implementation [here](TESTING.md).
+
 <!--
 Maintainer info on how to create the example App manually:
 

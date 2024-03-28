@@ -1,6 +1,14 @@
 # Testing
 
+Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator)., we've made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart.
+
+In this doc, we go in to detail on how to create the test with a real FusionAuth backend and what to look for in an automated testing environment.
+
+## Test
+
 TODO
+
+The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
 
 ## Kickstart Details
 
@@ -19,7 +27,9 @@ FusionAuth will be initially configured with these settings:
 
 TODO
 
-Challenge of UI end 2 end test with real fusionauth backend and how we solved it.
+- Freshly setup Android Emulator Browser issue.
+- Which image to use.
+- Recording UI.
 
 ```
 adb shell pm clear com.android.chrome
@@ -29,4 +39,3 @@ adb emu screenrecord start --time-limit 300 ./recording_video.webm
 ./gradlew clean connectedAndroidTest
 ```
 
-The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
