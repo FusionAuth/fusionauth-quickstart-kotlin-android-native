@@ -1,11 +1,11 @@
-# Quickstart: Android app with FusionAuth Android SDK
+# Quickstart: Android App with FusionAuth Android SDK
 
 This repository contains an Android app extracted from the FusionAuth Android SDK that works with a locally running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
 
 ## Setup
 
 ### Prerequisites
-- [Android Studio](https://developer.android.com/studio): The official IDE for Android will help you develop and install necessary tools to set it up.
+- [Android Studio](https://developer.android.com/studio): The official IDE for Android helps you develop and install the necessary tools to set it up.
   - At least Java 17 (which you can install via Android Studio)
 - [Docker](https://www.docker.com): The quickest way to stand up FusionAuth. Ensure you also have [docker compose](https://docs.docker.com/compose/) installed.
   - (Alternatively, you can [Install FusionAuth Manually](https://fusionauth.io/docs/v1/tech/installation-guide/)).
@@ -20,31 +20,47 @@ cd fusionauth/
 docker compose up -d
 ```
 
-The FusionAuth configuration files also make use of a unique feature of FusionAuth, called [Kickstart](https://fusionauth.io/docs/v1/tech/installation-guide/kickstart): when FusionAuth comes up for the first time, it will look at the [Kickstart file](./kickstart/kickstart.json) and mimic API calls to configure FusionAuth for use when it is first run. 
+The FusionAuth configuration files also make use of a unique feature of FusionAuth, called [Kickstart](https://fusionauth.io/docs/v1/tech/installation-guide/kickstart): when FusionAuth comes up for the first time, it will look at the [Kickstart file](./fusionauth/kickstart/kickstart.json) and mimic API calls to configure FusionAuth for use when it is first run. 
 
-> **NOTE**: If you ever want to reset the FusionAuth system, delete the volumes created by docker compose by executing `docker compose down -v`. 
+> **NOTE**: If you ever want to reset the FusionAuth system, delete the volumes created by Docker Compose by executing `docker compose down -v`. 
 
 FusionAuth will be initially configured with these settings:
 
-* tbd
+* An update to the Tenant Theme including the ChangeBank Theme to make the look and feel of the login the same as the ChangeBank App.
+* The Tenant Issuer will be set to `http://10.0.2.2:9011` to allow for testing with [Android Emulator](https://developer.android.com/studio/run/emulator).
+* Two Applications `Example Android App` and `Secondary Application` to test users with and without access to the Android App.
+* Your client secret is: `super-secret-secret-that-should-be-regenerated-for-production`
+* You'll have three example usernames available with slightly different user profiles `richard@example.com`, `monica@example.com` and `gilfoyle@example.com`. All having access to `Example Android App` where the password for all three is `password`.
+* And an example user without access `erlich@example.com` to the `Example Android App`
+* Your FusionAuth admin username is `admin@example.com` and your password is `password`.
+* Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
+
 
 You can log into the [FusionAuth admin UI](http://localhost:9011/admin) and look around if you want, but with Docker/Kickstart you don't need to.
 
 ### Running the Android App
 
-tbd
+This Android Quickstart is fully functional and can be used without any modifications:
+
+- Open this project in [Android Studio](https://developer.android.com/studio).
+- Either [connect a hardware device](https://developer.android.com/studio/run/device) or create an Android Virtual Device to run the [Android Emulator](https://developer.android.com/studio/run/emulator).
+- [Build and run the app](https://developer.android.com/studio/run/) following Android Studio guidelines.
 
 #### Automated End 2 End Test
 
-tbd
+The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
 
-### Further Information
+## Further Information
 
-tbd
+Please follow the following sections for further information about the Quickstart and FusionAuth Android SDK.
 
-### Troubleshooting
+### Quickstart
 
-tbd
+See the [FusionAuth Android Quickstart](https://fusionauth.io/docs/quickstarts/quickstart-android-java-native-fusionauth-sdk/) for a full tutorial on using FusionAuth and Android.
+
+### Documentation FusionAuth Android SDK
+
+See the [FusionAuth Android SDK Documentation](https://fusionauth.io/docs/sdks/android-sdk) for an overview to the SDK. Or see the latest [Full library documentation](https://github.com/FusionAuth/fusionauth-android-sdk/blob/main/library/docs/index.md) for the complete documentation of the SDK.
 
 <!--
 How to create the example App manually:
@@ -55,6 +71,11 @@ The example App is a copy from https://github.com/FusionAuth/fusionauth-android-
 2. copy the app/src folder from the sdk in to the app/ folder
 3. copy the app/build.gradle.kts from the sdk in to the app/ folder
 4. remove lint configuration for sarifReport from it
-5. copy the fusionauth/<latest version>/ from the sdk to fusionauth/
-6. make sure gradlew is on the same version as the sdk by running e.g. ./gradlew wrapper --gradle-version 8.6
+5. replace implementation(project(":library")) with implementation("io.fusionauth:fusionauth-android-sdk:0.1.1") and use accordingly the latest release version
+6. copy the fusionauth/<latest version>/ from the sdk to fusionauth/
+7. make sure gradlew is on the same version as the sdk by running e.g. ./gradlew wrapper --gradle-version 8.6
+8. test the app by first starting fusionauth and then run the app.
+9. once successful manually tested do a full End 2 End test by running ./gradlew clean connectedAndroidTest
+10. once successful commit your changes
+11. create a new tag according to the tag of the io.fusionauth:fusionauth-android-sdk e.g. 0.1.1
 -->
