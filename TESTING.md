@@ -1,17 +1,27 @@
 # Testing
-
+<!--
+tag::forDocSiteTesting[]
+-->
 Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator)., we've made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart.
 
 In this doc, we go in to detail on how to create the test with a real FusionAuth backend and what to look for in an automated testing environment.
-
+<!--
+end::forDocSiteTesting[]
+-->
 ## Test
-
+<!--
+tag::forDocSiteTest[]
+-->
 TODO
 
 The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
-
+<!--
+end::forDocSiteTest[]
+-->
 ## Kickstart Details
-
+<!--
+tag::forDocSiteKickstart[]
+-->
 FusionAuth will be initially configured with these settings:
 
 * An update to the Tenant Theme including the ChangeBank Theme to make the look and feel of the login the same as the ChangeBank App.
@@ -22,9 +32,13 @@ FusionAuth will be initially configured with these settings:
 * And an example user without access `erlich@example.com` to the `Example Android App`
 * Your FusionAuth admin username is `admin@example.com` and your password is `password`.
 * Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
-
+<!--
+end::forDocSiteKickstart[]
+-->
 ## Automated End 2 End Test
-
+<!--
+tag::forDocSiteE2ETest[]
+-->
 TODO
 
 - Freshly setup Android Emulator Browser issue.
@@ -39,3 +53,6 @@ adb emu screenrecord start --time-limit 300 ./recording_video.webm
 ./gradlew clean connectedAndroidTest
 ```
 
+<!--
+end::forDocSiteE2ETest[]
+-->

@@ -2,17 +2,30 @@
 
 This repository contains an Android app extracted from the FusionAuth Android SDK that works with a locally running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
 
+<!--
+this and following tags, and the corresponding end tag, are used to delineate what is pulled into the FusionAuth docs site (the client libraries pages). Don't remove unless you also change the docs site.
+
+Please also use ``` instead of indenting for code blocks. The backticks are translated correctly to adoc format.
+-->
+
 ## Setup
 
 ### Prerequisites
+<!--
+tag::forDocSitePrerequisites[]
+-->
 - [Android Studio](https://developer.android.com/studio): The official IDE for Android helps you develop and install the necessary tools to set it up.
   - At least Java 17 (which you can install via Android Studio)
 - [Docker](https://www.docker.com): The quickest way to stand up FusionAuth. Ensure you also have [docker compose](https://docs.docker.com/compose/) installed.
   - (Alternatively, you can [Install FusionAuth Manually](https://fusionauth.io/docs/v1/tech/installation-guide/)).
-
+<!--
+end::forDocSitePrerequisites[]
+-->
 
 ### FusionAuth Installation via Docker
-
+<!--
+tag::forDocSiteDocker[]
+-->
 In the root of this project directory (next to this README) is a [FusionAuth folder](./fusionauth). Assuming you have Docker installed on your machine, you can stand up FusionAuth up on your machine with:
 
 ```
@@ -31,9 +44,13 @@ FusionAuth will be initially configured with these settings:
 * Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
 
 You can log into the [FusionAuth admin UI](http://localhost:9011/admin) and look around if you want, but with Docker/Kickstart you don't need to.
-
+<!--
+end::forDocSiteDocker[]
+-->
 ### Running the Android App
-
+<!--
+tag::forDocSiteRun[]
+-->
 This Android Quickstart is fully functional and can be used without any modifications:
 
 - Open this project in [Android Studio](https://developer.android.com/studio).
@@ -41,7 +58,9 @@ This Android Quickstart is fully functional and can be used without any modifica
 - [Build and run the app](https://developer.android.com/studio/run/) following Android Studio guidelines.
 
 And there are additional [testing instructions](TESTING.md) available for different scenarios.
-
+<!--
+end::forDocSiteRun[]
+-->
 ## Further Information
 
 Please follow the following sections for further information about the Quickstart and FusionAuth Android SDK.
