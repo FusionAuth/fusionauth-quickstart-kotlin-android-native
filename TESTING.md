@@ -2,7 +2,7 @@
 <!--
 tag::forDocSiteTesting[]
 -->
-Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator)., we've made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart.
+Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator). We've made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart as well.
 
 In this doc, we go in to detail on how to create the test with a real FusionAuth backend and what to look for in an automated testing environment.
 <!--
@@ -14,7 +14,30 @@ tag::forDocSiteTest[]
 -->
 TODO
 
-The Quickstart includes a full End 2 End Test that uses all the different functionalities provided by the example App.
+We intendet to test all use cases relevant for this SDK, which include: `Login` `Refresh Token` `User Info` `Logout`
+
+Which looks at the first glance very trivial tests but we are looking for specific results in each of these use cases.
+
+### Login
+
+* Does it redirect to FusionAuth?
+* Does a successful login result in a redirect to the Home screen?
+
+### Refresh Token
+
+* Is it refreshing the Token?
+
+### User Info
+
+* Is the User Info received?
+* Depending on the different User Info returned, are all the different data sets handled properly?
+
+### Logout
+
+* Does it redirect to FusionAuth?
+* Does it invalidate the user session?
+* Does it return to the Login screen?
+
 <!--
 end::forDocSiteTest[]
 -->
@@ -22,7 +45,7 @@ end::forDocSiteTest[]
 <!--
 tag::forDocSiteKickstart[]
 -->
-FusionAuth will be initially configured with these settings:
+To be able to test the different scenarios FusionAuth will be initially configured with these settings:
 
 * An update to the Tenant Theme including the ChangeBank Theme to make the look and feel of the login the same as the ChangeBank App.
 * The Tenant Issuer will be set to `http://10.0.2.2:9011` to allow for testing with [Android Emulator](https://developer.android.com/studio/run/emulator).
@@ -39,20 +62,78 @@ end::forDocSiteKickstart[]
 <!--
 tag::forDocSiteE2ETest[]
 -->
-TODO
+The Quickstart includes a [Full End 2 End Test](app/src/androidTest/java/io/fusionauth/sdk/FullEnd2EndTest.kt) that uses all the different functionalities provided by the example App.
 
-- Freshly setup Android Emulator Browser issue.
-- Which image to use.
-- Recording UI.
+### Test Prerequisites
+
+#### Emulator Image
+
+Starting the emulator requires the right image for the test, we are using the `google_apis` images for the last 5 API level. 
+
+If you are automating your tests with a test matrix it is important to know the change of the architecture starting at API Level 31 to `x86_64` from previously `x86`.
+
+#### Browser
+
+Every time an emulator is started for the first time the Browser setup is not suitable for Testing as it will popup different modals like `Welcome to Chrome` or `Sign in to Chrome`, which are changing with every Chrome version.
+
+To prevent chrome displaying any of these modals no matter the version, we execute the following commands once the emulator is started:
 
 ```
 adb shell pm clear com.android.chrome
 adb shell am set-debug-app --persistent com.android.chrome
 adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
-adb emu screenrecord start --time-limit 300 ./recording_video.webm
-./gradlew clean connectedAndroidTest
 ```
 
+#### Recording
+
+All thought there are a lot of log details to help to debug a failed test. It makes sense to record the test as a video for further debugging input.
+
+If you Automate your test you can pass this before starting the test command:
+
+```
+adb emu screenrecord start --time-limit 300 ./recording_video.webm
+```
+
+Depending on the build time of your App you might see only a Mobile screen for some time untill your App is started and displayed.
+
+### Test Setup
+
+The `setUp` test initialization includes the following steps:
+- Initializes `Intents`.
+- Sets up `uiAutomation` to interact with the system's UI.
+
+### End-to-End Test (`e2eTest`)
+
+This test validates the application by executing the following steps, as a user would:
+
+1. Taps the login button(`start_auth`).
+2. Waits for the login form to appear.
+3. Fills in the username(`richard@example.com`) and password(`password`) in the login form.
+4. Submits the form using the enter key.
+5. Waits for the token view to be shown(`sign_out`).
+6. Checks the refresh token functionality by comparing the token expiration time before and after the refresh.
+7. Taps the logout button(`sign_out`).
+8. Waits for the login activity to be displayed again.
+9. Repeats steps 3-8 for a second user, using username `gilfoyle@example.com` and their password.
+
+This test is then repeated a second time with `RepeatRule` to ensure logout was successful and the login form is displayed again.
+
+Helper methods are used throughout the test to interact with the UI:
+
+- `closeKeyboardIfOpen`: Closes the system's keyboard if it's open, preventing it from obscuring the UI elements being interacted with.
+
+### Test Teardown
+
+The test concludes by releasing the initialized intents in the `tearDown` method.
+
+### Constants
+
+The constants used in the test include:
+- `USERNAME`, `PASSWORD`: Credentials of the first user.
+- `USERNAME2`, `PASSWORD2`: Credentials of the second user.
+- `TIMEOUT_MILLIS`: The duration for which the test waits for the UI elements to appear in the system, expressed in milliseconds.
+
+Please note that the actual username, password, and timeouts would typically be environment-specific and not part of the test code.
 <!--
 end::forDocSiteE2ETest[]
 -->

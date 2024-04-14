@@ -54,14 +54,13 @@ internal class FullEnd2EndTest {
      * Executes an end-to-end test for the login functionality. It performs the following steps:
      * 1. Clicks the login button.
      * 2. Waits for the login form to appear.
-     * 3. Handles any modals (Welcome to Chrome, Sign in to Chrome) if they appear.
-     * 4. Sets the username and password on the login form.
-     * 5. Submits the form by pressing the enter key.
-     * 6. Waits for the token activity to be displayed.
-     * 7. Checks the refresh token functionality.
-     * 8. Checks if the token was refreshed.
-     * 9. Clicks the sign-out button.
-     * 10. Waits for the login activity to be displayed.
+     * 3. Sets the username and password on the login form.
+     * 4. Submits the form by pressing the enter key.
+     * 5. Waits for the token activity to be displayed.
+     * 6. Checks the refresh token functionality.
+     * 7. Checks if the token was refreshed.
+     * 8. Clicks the sign-out button.
+     * 9. Waits for the login activity to be displayed.
      *
      * This test is repeated twice to ensure logout was successful and the login form is displayed again.
      */
