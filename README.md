@@ -14,6 +14,8 @@ Please also use ``` instead of indenting for code blocks. The backticks are tran
 <!--
 tag::forDocSitePrerequisites[]
 -->
+You will need the following things properly installed on your computer.
+
 - [Android Studio](https://developer.android.com/studio): The official IDE for Android helps you develop and install the necessary tools to set it up.
   - At least Java 17 (which you can install via Android Studio)
 - [Docker](https://www.docker.com): The quickest way to stand up FusionAuth. Ensure you also have [docker compose](https://docs.docker.com/compose/) installed.
@@ -26,10 +28,9 @@ end::forDocSitePrerequisites[]
 <!--
 tag::forDocSiteDocker[]
 -->
-In the root of this project directory (next to this README) is a [FusionAuth folder](./fusionauth). Assuming you have Docker installed on your machine, you can stand up FusionAuth up on your machine with:
+The root of this project directory _(next to this README)_ are two files: [a Docker compose file](./docker-compose.yml) and an [environment variables configuration file](./.env). Assuming you have Docker installed on your machine, you can stand up FusionAuth up on your machine with:
 
-```
-cd fusionauth/
+```bash
 docker compose up -d
 ```
 
@@ -38,7 +39,7 @@ The FusionAuth configuration files also make use of a unique feature of FusionAu
 > **NOTE**: If you ever want to reset the FusionAuth system, delete the volumes created by Docker Compose by executing `docker compose down -v`. 
 
 FusionAuth will be initially configured with these settings:
-
+* Your client Id is: `21e13847-4f30-4477-a2d9-33c3a80bd15a`
 * Your `Example Android App` test user `richard@example.com` and your password is `password`.
 * Your FusionAuth admin username is `admin@example.com` and your password is `password`.
 * Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
@@ -53,7 +54,7 @@ tag::forDocSiteRun[]
 -->
 This Android Quickstart is fully functional and can be used without any modifications:
 
-- Open this project in [Android Studio](https://developer.android.com/studio).
+- Open this project's `complete-application` folder in [Android Studio](https://developer.android.com/studio).
 - Either [connect a hardware device](https://developer.android.com/studio/run/device) or create an Android Virtual Device to run the [Android Emulator](https://developer.android.com/studio/run/emulator).
 - [Build and run the app](https://developer.android.com/studio/run/) following Android Studio guidelines.
 
