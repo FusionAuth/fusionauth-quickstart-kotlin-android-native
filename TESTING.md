@@ -2,7 +2,7 @@
 <!--
 tag::forDocSiteTesting[]
 -->
-Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator). We've made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart as well.
+Using OAuth2 with a browser popup for Authentication can be tricky to use during automated testing in an [Android Emulator](https://developer.android.com/studio/run/emulator). We made some efforts in the development of the FusionAuth Android SDK and made the test available in this Quickstart as well.
 
 In this doc, we go in to detail on how to create the test with a real FusionAuth backend and what to look for in an automated testing environment.
 <!--
@@ -14,9 +14,9 @@ tag::forDocSiteTest[]
 -->
 TODO
 
-We intendet to test all use cases relevant for this SDK, which include: `Login` `Refresh Token` `User Info` `Logout`
+We intended to test all use cases relevant for this SDK, which include: `Login` `Refresh Token` `User Info` `Logout`
 
-Which looks at the first glance very trivial tests but we are looking for specific results in each of these use cases.
+Which looks at the first glance very trivial tests but we’re looking for specific results in each of these use cases.
 
 ### Login
 
@@ -51,7 +51,7 @@ To be able to test the different scenarios FusionAuth will be initially configur
 * The Tenant Issuer will be set to `http://10.0.2.2:9011` to allow for testing with [Android Emulator](https://developer.android.com/studio/run/emulator).
 * Two Applications `Example Android App` and `Secondary Application` to test users with and without access to the Android App.
 * Your client secret is: `super-secret-secret-that-should-be-regenerated-for-production`
-* You'll have three example usernames available with slightly different user profiles `richard@example.com`, `monica@example.com` and `gilfoyle@example.com`. All having access to `Example Android App` where the password for all three is `password`.
+* You will have three example usernames available with slightly different user profiles `richard@example.com`, `monica@example.com` and `gilfoyle@example.com`. All having access to `Example Android App` where the password for all three is `password`.
 * And an example user without access `erlich@example.com` to the `Example Android App`
 * Your FusionAuth admin username is `admin@example.com` and your password is `password`.
 * Your fusionAuthBaseUrl to access FusionAuth is `http://localhost:9011/`
@@ -62,15 +62,29 @@ end::forDocSiteKickstart[]
 <!--
 tag::forDocSiteE2ETest[]
 -->
-The Quickstart includes a [Full End 2 End Test](app/src/androidTest/java/io/fusionauth/sdk/FullEnd2EndTest.kt) that uses all the different functionalities provided by the example App.
+The Quickstart includes a [Full End 2 End Test](complete-application/app/src/androidTest/java/io/fusionauth/sdk/FullEnd2EndTest.kt) that uses all the different functionalities provided by the example App.
 
 ### Test Prerequisites
 
 #### Emulator Image
 
-Starting the emulator requires the right image for the test, we are using the `google_apis` images for the last 5 API level. 
+Starting the emulator requires the right image for the test, we’re using the `google_apis` images for the last 5 API level.
 
-If you are automating your tests with a test matrix it is important to know the change of the architecture starting at API Level 31 to `x86_64` from previously `x86`.
+In particular 29, 30, 31, 33, and 34, the 32 API level is skipped as it is a special [Android 12L release](https://blog.google/products/android/12l-larger-screens/) for tablets and foldables with different layouts we're not concerned about.
+
+Android Studio offers you to configure and handle emulators within the IDE, but you can go via the [emulator commandline](https://developer.android.com/studio/run/emulator-commandline) too.
+
+If you’re automating your tests with a test matrix, it is important to know the change of the architecture starting at API Level 31 to `x86_64` from previously `x86`.
+
+Which results in our case in the following five emulator configurations:
+
+| api-level | target      | arch   |
+|-----------|-------------|--------|
+| 29        | google_apis | x86    |
+| 30        | google_apis | x86    |
+| 31        | google_apis | x86_64 |
+| 33        | google_apis | x86_64 |
+| 34        | google_apis | x86_64 |
 
 #### Browser
 
@@ -82,6 +96,12 @@ To prevent chrome displaying any of these modals no matter the version, we execu
 adb shell pm clear com.android.chrome
 adb shell am set-debug-app --persistent com.android.chrome
 adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
+```
+
+With Android Studio you can start the emulator and start chrome manually to skip the modals, or use the `adb` command ([Android Debug Bridge](https://developer.android.com/tools/adb)) which can be found in your Android SDK installation:
+
+```
+$HOME/Android/Sdk/platform-tools/adb
 ```
 
 #### Recording
@@ -100,7 +120,7 @@ Depending on the build time of your App you might see only a Mobile screen for s
 
 The `setUp` test initialization includes the following steps:
 - Initializes `Intents`.
-- Sets up `uiAutomation` to interact with the system's UI.
+- Sets up `uiAutomation` to interact with the system UI.
 
 ### End-to-End Test (`e2eTest`)
 
@@ -133,7 +153,7 @@ The constants used in the test include:
 - `USERNAME2`, `PASSWORD2`: Credentials of the second user.
 - `TIMEOUT_MILLIS`: The duration for which the test waits for the UI elements to appear in the system, expressed in milliseconds.
 
-Please note that the actual username, password, and timeouts would typically be environment-specific and not part of the test code.
+Please note that the username, password, and timeouts would typically be environment-specific and not part of the test code.
 <!--
 end::forDocSiteE2ETest[]
 -->
