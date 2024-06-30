@@ -1,3 +1,12 @@
+A full tutorial on FusionAuth Android SDK Test.
+
+# Table of Contents
+
+- [Testing](#testing)
+    - [Test Cases](#test-cases)
+    - [Test Data](#test-data)
+    - [Test Automation](#test-automation)
+
 # Testing
 <!--
 tag::forDocSiteTesting[]
@@ -8,15 +17,13 @@ In this doc, we go in to detail on how to create the test with a real FusionAuth
 <!--
 end::forDocSiteTesting[]
 -->
-## Test
+## Test Cases
 <!--
 tag::forDocSiteTest[]
 -->
-TODO
+We intend to test all use cases relevant for this SDK, which include: `Login` `Refresh Token` `User Info` `Logout` in combination with certain [Test Data](#test-data).
 
-We intended to test all use cases relevant for this SDK, which include: `Login` `Refresh Token` `User Info` `Logout`
-
-Which looks at the first glance very trivial tests but we’re looking for specific results in each of these use cases.
+At first glance, these may seem like trivial tests, but we are seeking specific results for each use case and use them repeatedly in automated testing.
 
 ### Login
 
@@ -41,7 +48,11 @@ Which looks at the first glance very trivial tests but we’re looking for speci
 <!--
 end::forDocSiteTest[]
 -->
-## Kickstart Details
+## Test Data
+
+All the relevant data for testing is defined in FusionAuth which includes multiple flavors of Applicatoins and Users.
+
+### Kickstart Details
 <!--
 tag::forDocSiteKickstart[]
 -->
@@ -58,13 +69,13 @@ To be able to test the different scenarios FusionAuth will be initially configur
 <!--
 end::forDocSiteKickstart[]
 -->
-## Automated End 2 End Test
+## Test Automation
 <!--
 tag::forDocSiteE2ETest[]
 -->
 The Quickstart includes a [Full End 2 End Test](complete-application/app/src/androidTest/java/io/fusionauth/sdk/FullEnd2EndTest.kt) that uses all the different functionalities provided by the example App.
 
-### Test Prerequisites
+### Test Automation Prerequisites
 
 #### Emulator Image
 
@@ -86,6 +97,8 @@ Which results in our case in the following five emulator configurations:
 | 33        | google_apis | x86_64 |
 | 34        | google_apis | x86_64 |
 
+An example of such an automation you can find in the [e2e-test workflows](https://github.com/FusionAuth/fusionauth-android-sdk/tree/main/.github/workflows) of the FusionAuth Android SDK.
+
 #### Browser
 
 Every time an emulator is started for the first time the Browser setup is not suitable for Testing as it will popup different modals like `Welcome to Chrome` or `Sign in to Chrome`, which are changing with every Chrome version.
@@ -98,6 +111,8 @@ adb shell am set-debug-app --persistent com.android.chrome
 adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
 ```
 
+This is something you have to do only once for your emulator. But gets important during fully automated testing scenarios in a workflow, where the emulator is setup from scratch with every test.
+
 With Android Studio you can start the emulator and start chrome manually to skip the modals, or use the `adb` command ([Android Debug Bridge](https://developer.android.com/tools/adb)) which can be found in your Android SDK installation:
 
 ```
@@ -106,9 +121,9 @@ $HOME/Android/Sdk/platform-tools/adb
 
 #### Recording
 
-All thought there are a lot of log details to help to debug a failed test. It makes sense to record the test as a video for further debugging input.
+All thought there are a lot of log details in your IDE and automated workflow to help to debug a failed test. It makes sense to watch the test in the emulator or to record the test as a video for further debugging input and context.
 
-If you Automate your test you can pass this before starting the test command:
+If you automate your test in a workflow you can pass this before starting the test command:
 
 ```
 adb emu screenrecord start --time-limit 300 ./recording_video.webm
@@ -116,13 +131,13 @@ adb emu screenrecord start --time-limit 300 ./recording_video.webm
 
 Depending on the build time of your App you might see only a Mobile screen for some time untill your App is started and displayed.
 
-### Test Setup
+### Test Automation Setup
 
 The `setUp` test initialization includes the following steps:
 - Initializes `Intents`.
 - Sets up `uiAutomation` to interact with the system UI.
 
-### End-to-End Test (`e2eTest`)
+### Automated End-to-End Test (`e2eTest`)
 
 This test validates the application by executing the following steps, as a user would:
 
