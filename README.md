@@ -2,6 +2,8 @@
 
 This repository contains an Android app extracted from the FusionAuth Android SDK that works with a locally running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
 
+This example uses the FusionAuth Android SDK 0.2.0 release.
+
 <!--
 this and following tags, and the corresponding end tag, are used to delineate what is pulled into the FusionAuth docs site (the client libraries pages). Don't remove unless you also change the docs site.
 
