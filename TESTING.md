@@ -81,7 +81,7 @@ The Quickstart includes a [Full End 2 End Test](complete-application/app/src/and
 
 Starting the emulator requires the right image for the test, we’re using the `google_apis` images for the last 5 API level.
 
-In particular 29, 30, 31, 33, and 34, the 32 API level is skipped as it is a special [Android 12L release](https://blog.google/products/android/12l-larger-screens/) for tablets and foldables with different layouts we're not concerned about.
+In particular 29, 30, 31, 33, 34, 35 and 36, the 32 API level is skipped as it is a special [Android 12L release](https://blog.google/products/android/12l-larger-screens/) for tablets and foldables with different layouts we're not concerned about.
 
 Android Studio offers you to configure and handle emulators within the IDE, but you can go via the [emulator commandline](https://developer.android.com/studio/run/emulator-commandline) too.
 
@@ -96,6 +96,8 @@ Which results in our case in the following five emulator configurations:
 | 31        | google_apis | x86_64 |
 | 33        | google_apis | x86_64 |
 | 34        | google_apis | x86_64 |
+| 35        | google_apis | x86_64 |
+| 36        | google_apis | x86_64 |
 
 An example of such an automation you can find in the [e2e-test workflows](https://github.com/FusionAuth/fusionauth-android-sdk/tree/main/.github/workflows) of the FusionAuth Android SDK.
 
